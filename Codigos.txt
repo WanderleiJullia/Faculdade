@@ -1,0 +1,26 @@
+create table Pedido(
+IDpedido int auto_increment primary key,
+DataPedido datetime,
+NomeCliente varchar(100)
+);
+
+insert into Pedido (DataPedido, NomeCliente) values ('2003-05-18', 'Jullia');
+insert into Pedido (DataPedido, NomeCliente) values ('2009-04-23', 'Raffael');
+insert into Pedido (DataPedido, NomeCliente) values ('2007-02-23', 'Guilherme');
+
+
+DELIMITER $
+create trigger RegistroDataCriacaoPedido
+before insert on Pedido
+for each row 
+begin 
+
+set New.DataPedido = now();
+end;
+$
+DELIMITER ;
+
+insert into Pedido (NomeCliente) values ('Maria');
+
+select * FROM PEDIDO; 
+
